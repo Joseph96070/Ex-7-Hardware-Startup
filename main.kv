@@ -1,0 +1,141 @@
+<MainScreen>:
+    #: import time __main__.time
+    btn: btn
+    counter: counter
+    motorslider: motorslider
+    direction: direction
+    clicked: clicked
+    click:click
+    motor:motor
+    mouse:mouse
+    name: 'main'
+    on_enter:root.start_joy_thread()
+
+    FloatLayout:
+        size_hint: None, None
+
+    Slider:
+            id: motorslider
+            size_hint: .3, .1
+            x: root.width * 0.75
+            y: root.height * 0.75
+            min: 0
+            max: 100
+            step: 1
+            orientation: 'horizontal'
+        DPEAButton:
+            id: label
+            size: 100, 100
+            x: root.width * 0.25
+            y: root.height * 0.25
+            text:str(motorslider.value)
+
+    DPEAButton:
+            id: motor
+            text: "motor-on"
+            size: 100, 100
+            x: root.width * 0.25
+            y: root.height * 0.5
+            color: 0.9, .4, .7, 1
+            on_press: root.motor()
+
+
+
+
+
+
+
+    DPEAButton:
+        id: direction
+        text: "change direction"
+        size: 100, 100
+        x: root.width * 0.25
+        y: root.height * 0.5
+        color: 0.9, .4, .7, 1
+        on_press: root.motor()
+
+
+    DPEAButton:
+        id: clicked
+        text: "click me"
+        size: 100, 100
+        x: root.width * 0.75
+        y: root.height * 0.5
+        color: 1, 0.5, 0.2, 1
+        on_press: root.pushed()
+
+    DPEAButton:
+        id: btn
+        text: 'on'
+        size: 100, 100
+        x: root.width * 0.5
+        y: root.height * 0.5
+        color: 0, .5, .2, 1
+        on_press: root.pressed()
+
+
+    DPEAButton:
+        id: counter
+        text: '0'
+        size: 100, 100
+        x: root.width * 0.5
+        y: root.height * 0.75
+        color: .9, .1, 0.03, 1
+        on_press: root.counterpressed()
+
+    ImageButton:
+        id: click
+        source: "Ssbu_pokeball.png"
+        text: "click to change screens"
+        size: 150, 150
+        x: root.width * 0.489999
+        y: root.height * 0.1
+        color: 1, 1, 1, 1
+        on_press: root.transition_to_second_screen()
+
+
+    ImageButton:
+        id: mouse
+        source: "select-curser-512.webp"
+        size: 150, 150
+        x: root.width * 0.1
+        y: root.height * 0.1
+        color: 1, 1, 1, 1
+        on_press: root.mover()
+
+
+<SecondScreen>:
+    #: import time __main__.time
+    name: 'main'
+    click: click
+    slider: slider
+    label: label
+    FloatLayout:
+        size_hint: None, None
+
+    ImageButton:
+        id: click
+        text: "click to change back"
+        size: 150, 150
+        source: "Ssbu_pokeball.png"
+        x: root.width * 0.75
+        y: root.height * 0.75
+        color: 1, 1, 1, 1
+        on_press: root.transition_to_main_screen()
+
+    BoxLayout:
+        Slider:
+            id: slider
+            size_hint: .3, .1
+            x: root.width * 0.75
+            y: root.height * 0.75
+            min: 0
+            max: 100
+            step: 1
+            orientation: 'horizontal'
+        DPEAButton:
+            id: label
+            size: 100, 100
+            x: root.width * 0.25
+            y: root.height * 0.25
+            text:str(slider.value)
