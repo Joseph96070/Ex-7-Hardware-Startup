@@ -9,6 +9,7 @@ from time import sleep
 import RPi.GPIO as GPIO
 from pidev.stepper import stepper
 from Slush.Devices import L6470Registers
+
 spi = spidev.SpiDev()
 from kivy.app import App
 from kivy.core.window import Window
@@ -24,7 +25,7 @@ from pidev.kivy.selfupdatinglabel import SelfUpdatingLabel
 
 from pidev.Joystick import Joystick
 from datetime import datetime
-from threading import Thread                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+from threading import Thread
 from time import sleep
 
 time = datetime
@@ -59,6 +60,8 @@ class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
+    rotations = 3500
+
     s0 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_current=20, deaccel_current=20,
                  steps_per_unit=200, speed=2)
 
@@ -92,10 +95,9 @@ class MainScreen(Screen):
         anim.start(self.mouse)
 
     def direction_switch(self):
-        self.s0.start_relative_move(5)
+        self.s0.start_relative_move(-(self.rotations))
         self.s0.set_as_home()
         self.s0.start_relative_move(10)
-
 
     def pushed(self):
         if self.motor.text == "motor-on":
@@ -106,8 +108,8 @@ class MainScreen(Screen):
     def counterpressed(self):
         self.counter.text = str(int(self.counter.text) + 1)
 
-    def movemotor(self):
-        self.s0.start_relative_move(3500)
+    def move_motor(self):
+        self.s0.start_relative_move(self.rotations)
         sleep(2)
         self.s0.softStop()
 
