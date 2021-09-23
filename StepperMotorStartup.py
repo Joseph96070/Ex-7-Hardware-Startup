@@ -18,7 +18,7 @@ s0 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_curr
 
 # get current position and print it to the screen
 s0.get_position_in_units()
-# this tells us that the startup position is currently setup as the "home" position
+# this tells us that thejdskhafkjdshfkjshfjadshkjfh startup position is currently setup as the "home" position
 
 # move stepper connected to port 0, 5 rotations clockwise
 s0.start_relative_move(5)

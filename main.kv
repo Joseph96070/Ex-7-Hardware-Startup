@@ -15,14 +15,14 @@
         size_hint: None, None
 
     Slider:
-            id: motorslider
-            size_hint: .3, .1
-            x: root.width * 0.75
-            y: root.height * 0.75
-            min: 0
-            max: 100
-            step: 1
-            orientation: 'horizontal'
+        id: motorslider
+        size_hint: .3, .1
+        x: root.width * 0.75
+        y: root.height * 0.75
+        min: 0
+        max: 100
+        step: 1
+        orientation: 'horizontal'
         DPEAButton:
             id: label
             size: 100, 100
@@ -31,29 +31,22 @@
             text:str(motorslider.value)
 
     DPEAButton:
-            id: motor
-            text: "motor-on"
-            size: 100, 100
-            x: root.width * 0.25
-            y: root.height * 0.5
-            color: 0.9, .4, .7, 1
-            on_press: root.motor()
-
-
-
-
-
-
+        id: motor
+        text: "motor-on"
+        size: 100, 100
+        x: root.width * 0.25
+        y: root.height * 0.5
+        color: 0.9, .4, .7, 1
+        on_press: root.movemotor()
 
     DPEAButton:
         id: direction
         text: "change direction"
         size: 100, 100
         x: root.width * 0.25
-        y: root.height * 0.5
+        y: root.height * 0.1
         color: 0.9, .4, .7, 1
-        on_press: root.motor()
-
+        on_press: root.movemotor()
 
     DPEAButton:
         id: clicked

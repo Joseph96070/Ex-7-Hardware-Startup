@@ -1,8 +1,15 @@
 import os
 
-# os.environ['DISPLAY'] = ":0.0"
+os.environ['DISPLAY'] = ":0.0"
 # os.environ['KIVY_WINDOW'] = 'egl_rpi'
 
+import spidev
+import os
+from time import sleep
+import RPi.GPIO as GPIO
+from pidev.stepper import stepper
+from Slush.Devices import L6470Registers
+spi = spidev.SpiDev()
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
@@ -52,6 +59,8 @@ class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
+    s0 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_current=20, deaccel_current=20,
+                 steps_per_unit=200, speed=2)
 
     def joy_update(self):  # This should be inside the MainScreen Class
         while True:
@@ -83,9 +92,9 @@ class MainScreen(Screen):
         anim.start(self.mouse)
 
     def direction_switch(self):
-        s0.start_relative_move(self)
-        s0.set_as_home(self)
-        s0.start_relative_move(self)
+        self.s0.start_relative_move(5)
+        self.s0.set_as_home()
+        self.s0.start_relative_move(10)
 
 
     def pushed(self):
@@ -97,9 +106,10 @@ class MainScreen(Screen):
     def counterpressed(self):
         self.counter.text = str(int(self.counter.text) + 1)
 
-    def motor(self):
-        s0.start_relative_move(3500)
-        s0.softStop()
+    def movemotor(self):
+        self.s0.start_relative_move(3500)
+        sleep(2)
+        self.s0.softStop()
 
     def admin_action(self):
         """
