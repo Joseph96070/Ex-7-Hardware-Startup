@@ -17,11 +17,12 @@
     Slider:
         id: motorslider
         size_hint: .3, .1
-        x: root.width * 0.75
+        x: root.width * 0.05
         y: root.height * 0.75
         min: 0
-        max: 100
+        max: 10
         step: 1
+        on_value: root.motor_speed()
         orientation: 'horizontal'
         DPEAButton:
             id: label
@@ -120,8 +121,8 @@
         Slider:
             id: slider
             size_hint: .3, .1
-            x: root.width * 0.75
-            y: root.height * 0.75
+            x: root.width * 0.05
+            y: root.height * 0.7
             min: 0
             max: 100
             step: 1

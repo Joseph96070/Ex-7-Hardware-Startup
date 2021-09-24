@@ -60,10 +60,13 @@ class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
-    rotations = 3500
+    rotations = 500
 
     s0 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_current=20, deaccel_current=20,
-                 steps_per_unit=200, speed=2)
+                 steps_per_unit=200, speed=5)
+
+    s1 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_current=20, deaccel_current=20,
+                 steps_per_unit=200, speed=5)
 
     def joy_update(self):  # This should be inside the MainScreen Class
         while True:
@@ -96,7 +99,6 @@ class MainScreen(Screen):
 
     def direction_switch(self):
         self.s0.start_relative_move(-(self.rotations))
-        self.s0.set_as_home()
         self.s0.start_relative_move(10)
 
     def pushed(self):
@@ -112,6 +114,9 @@ class MainScreen(Screen):
         self.s0.start_relative_move(self.rotations)
         sleep(2)
         self.s0.softStop()
+
+    def motor_speed(self):
+        self.s1.set_speed(self.motorslider.value)
 
     def admin_action(self):
         """
