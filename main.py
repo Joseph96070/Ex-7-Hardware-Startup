@@ -99,7 +99,8 @@ class MainScreen(Screen):
 
     def direction_switch(self):
         self.s0.start_relative_move(-(self.rotations))
-        self.s0.start_relative_move(10)
+        sleep(2)
+        self.s0.softStop()
 
     def pushed(self):
         if self.motor.text == "motor-on":
@@ -117,6 +118,31 @@ class MainScreen(Screen):
 
     def motor_speed(self):
         self.s1.set_speed(self.motorslider.value)
+
+    def turn_as_described(self):
+        self.s0.set_as_home()
+        self.s0.go_until_press(0, 6400)
+        sleep(15)
+        print(self.s0.get_position_in_units())
+        sleep(10)
+        self.s0.softStop()
+        self.s0.go_until_press(0, 32000)
+        sleep(10)
+        print(self.s0.get_position_in_units())
+        sleep(8)
+        self.s0.softStop()
+        self.s0.goHome()
+        sleep(30)
+        self.s0.softStop()
+        print(self.s0.get_position_in_units())
+        self.s0.go_until_press(0, (8*6400))
+        sleep(100/8)
+        self.s0.softStop()
+        sleep(10)
+        self.s0.softStop()
+        self.s0.goHome()
+        print(self.s0.get_position_in_units())
+
 
     def admin_action(self):
         """
