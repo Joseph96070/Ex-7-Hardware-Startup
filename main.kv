@@ -5,6 +5,7 @@
     motorslider: motorslider
     direction: direction
     clicked: clicked
+    motor_label:motor_label
     motor_command: motor_command
     click:click
     motor:motor
@@ -33,13 +34,22 @@
             text:str(motorslider.value)
 
     DPEAButton:
+        id: motor_label
+        text: str(root.s0.get_position_in_units())
+        size: 100, 100
+        x: root.width * 0.9
+        y: root.height * 0.15
+        color: 0.9, .4, .7, 1
+
+    DPEAButton:
         id: motor
         text: "turn the motor on"
         size: 100, 100
         x: root.width * 0.75
         y: root.height * 0.25
         color: 0.9, .4, .7, 1
-        on_press: root.turn_as_described()
+        on_press: root.thread_function()
+
 
     DPEAButton:
         id: motor_command

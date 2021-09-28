@@ -123,25 +123,28 @@ class MainScreen(Screen):
         self.s0.set_as_home()
         self.s0.go_until_press(0, 6400)
         sleep(15)
-        print(self.s0.get_position_in_units())
+        self.motor_label.text = str(self.s0.get_position_in_units())
         sleep(10)
         self.s0.softStop()
         self.s0.go_until_press(0, 32000)
         sleep(10)
-        print(self.s0.get_position_in_units())
+        self.motor_label.text = str(self.s0.get_position_in_units())
         sleep(8)
         self.s0.softStop()
         self.s0.goHome()
         sleep(30)
         self.s0.softStop()
-        print(self.s0.get_position_in_units())
+        self.motor_label.text = str(self.s0.get_position_in_units())
         self.s0.go_until_press(0, (8*6400))
         sleep(100/8)
         self.s0.softStop()
         sleep(10)
         self.s0.softStop()
         self.s0.goHome()
-        print(self.s0.get_position_in_units())
+        self.motor_label.text = str(self.s0.get_position_in_units())
+
+    def thread_function(self):
+        Thread(target=self.turn_as_described).start()
 
 
     def admin_action(self):
